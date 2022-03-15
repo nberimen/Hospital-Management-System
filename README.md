@@ -1,1 +1,1 @@
-# Hospital Management System Project with Spring Boot & ReactJS
+## Hospital Management System Project with Spring Boot & ReactJS
