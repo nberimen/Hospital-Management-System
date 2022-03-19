@@ -1,5 +1,6 @@
 package com.nberimen.hospitalmanagementsystem.appointment.entity;
 
+import com.nberimen.hospitalmanagementsystem.gen.entity.BaseEntity;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -8,7 +9,7 @@ import java.util.Date;
 @Entity
 @Table(name = "APPOINTMENT")
 @Data
-public class Appointment {
+public class Appointment extends BaseEntity {
 
     @Id
     @SequenceGenerator(name = "Appointment", sequenceName = "APPOINTMENT_ID_SEQ")
