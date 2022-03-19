@@ -1,5 +1,6 @@
 package com.nberimen.hospitalmanagementsystem.doctor.entity;
 
+import com.nberimen.hospitalmanagementsystem.gen.entity.BaseEntity;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -7,7 +8,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "DOCTOR")
 @Data
-public class Doctor {
+public class Doctor extends BaseEntity {
 
     @Id
     @GeneratedValue(generator = "Doctor")
