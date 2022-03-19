@@ -14,6 +14,9 @@ public class Doctor {
     @SequenceGenerator(name = "Doctor", sequenceName = "DOCTOR_ID_SEQ")
     private Long id;
 
+    @Column(name = "ID_HOSPITAL", nullable = false)
+    private Long hospitalId;
+
     @Column(name = "FIRST_NAME", length = 50, nullable = false)
     private String firstName;
 

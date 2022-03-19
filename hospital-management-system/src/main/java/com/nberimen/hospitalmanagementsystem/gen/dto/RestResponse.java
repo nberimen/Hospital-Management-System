@@ -15,7 +15,7 @@ public class RestResponse<T> implements Serializable {
     private T data;
     private Date responseDate;
     private boolean isSuccess;
-    private MyMessages messages;
+    private String messages;
 
     public RestResponse(T data, boolean isSuccess) {
         this.data = data;

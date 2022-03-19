@@ -1,12 +1,12 @@
 package com.nberimen.hospitalmanagementsystem.gen.service;
 
-import com.nberimen.hospitalmanagementsystem.gen.entity.BaseAdditionalFields;
 import com.nberimen.hospitalmanagementsystem.gen.entity.BaseEntity;
+import com.nberimen.hospitalmanagementsystem.gen.enums.GenErrorMessage;
+import com.nberimen.hospitalmanagementsystem.gen.exceptions.ItemNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,7 +40,7 @@ public abstract class BaseEntityService<E extends BaseEntity, R extends JpaRepos
         if (entityOptional.isPresent()) {
             entity = entityOptional.get();
         } else {
-            throw new RuntimeException(); //TODO GenErrorException
+            throw new ItemNotFoundException(GenErrorMessage.ITEM_NOT_FOUND);
         }
         return entity;
 

@@ -1,7 +1,6 @@
 package com.nberimen.hospitalmanagementsystem.gen.exception;
 
 
-import com.nberimen.hospitalmanagementsystem.gen.dto.MyMessage;
 import com.nberimen.hospitalmanagementsystem.gen.dto.RestResponse;
 import com.nberimen.hospitalmanagementsystem.gen.exceptions.GenBusinessException;
 import com.nberimen.hospitalmanagementsystem.gen.exceptions.ItemNotFoundException;
@@ -31,7 +30,7 @@ public class GenCustomizedResponseEntityExceptionHandler extends ResponseEntityE
         GenExceptionResponse genExceptionResponse = new GenExceptionResponse(errorDate, message, description);
 
         RestResponse<GenExceptionResponse> restResponse = RestResponse.error(genExceptionResponse);
-        restResponse.getMessages().getErrorMessageList().add(new MyMessage(message, "acc."));
+        restResponse.setMessages(message);
 
         return new ResponseEntity<>(restResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
@@ -46,7 +45,7 @@ public class GenCustomizedResponseEntityExceptionHandler extends ResponseEntityE
         GenExceptionResponse genExceptionResponse = new GenExceptionResponse(errorDate, message, description);
 
         RestResponse<GenExceptionResponse> restResponse = RestResponse.error(genExceptionResponse);
-        restResponse.getMessages().getErrorMessageList().add(new MyMessage(message, "404"));
+        restResponse.setMessages(message);
 
         return new ResponseEntity<>(restResponse, HttpStatus.NOT_FOUND);
     }
@@ -60,7 +59,7 @@ public class GenCustomizedResponseEntityExceptionHandler extends ResponseEntityE
         GenExceptionResponse genExceptionResponse = new GenExceptionResponse(errorDate, message, description);
 
         RestResponse<GenExceptionResponse> restResponse = RestResponse.error(genExceptionResponse);
-        restResponse.getMessages().getErrorMessageList().add(new MyMessage(message, "500"));
+        restResponse.setMessages(message);
 
         return new ResponseEntity<>(restResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
@@ -74,7 +73,7 @@ public class GenCustomizedResponseEntityExceptionHandler extends ResponseEntityE
         GenExceptionResponse genExceptionResponse = new GenExceptionResponse(errorDate, message, description);
 
         RestResponse<GenExceptionResponse> restResponse = RestResponse.error(genExceptionResponse);
-        restResponse.getMessages().getErrorMessageList().add(new MyMessage(message, "400"));
+        restResponse.setMessages(message);
 
         return new ResponseEntity<>(restResponse, HttpStatus.BAD_REQUEST);
     }
