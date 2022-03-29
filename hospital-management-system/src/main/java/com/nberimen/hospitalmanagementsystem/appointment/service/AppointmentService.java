@@ -7,12 +7,13 @@ import com.nberimen.hospitalmanagementsystem.appointment.entity.Appointment;
 import com.nberimen.hospitalmanagementsystem.appointment.service.entityservice.AppointmentEntityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class AppointmentService {
     private final AppointmentEntityService appointmentEntityService;
 

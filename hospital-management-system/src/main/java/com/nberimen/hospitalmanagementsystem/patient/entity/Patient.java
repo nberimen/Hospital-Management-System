@@ -21,8 +21,8 @@ public class Patient extends BaseEntity {
     @Column(name = "LAST_NAME", length = 50, nullable = false)
     private String lastName;
 
-    @Column(name = "EMAIL", length = 100, nullable = false, unique = true)
-    private String email;
+    @Column(name = "IDENTITY_NO")
+    private Long identityNo;
 
     @Column(name = "PASSWORD", nullable = false)
     private String password;
@@ -30,6 +30,5 @@ public class Patient extends BaseEntity {
     @Column(name = "PHONE_NUMBER", nullable = false)
     private String phoneNumber;
 
-    @Column(name = "IDENTITY_NO")
-    private Long identityNo;
+
 }

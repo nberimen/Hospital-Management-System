@@ -7,11 +7,13 @@ import com.nberimen.hospitalmanagementsystem.city.entity.City;
 import com.nberimen.hospitalmanagementsystem.city.service.entityservice.CityEntityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class CityService {
 
     private final CityEntityService cityEntityService;

@@ -6,15 +6,19 @@ import com.nberimen.hospitalmanagementsystem.patient.dto.PatientSaveRequestDto;
 import com.nberimen.hospitalmanagementsystem.patient.entity.Patient;
 import com.nberimen.hospitalmanagementsystem.patient.service.entityservice.PatientEntityService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class PatientService {
 
     private final PatientEntityService patientEntityService;
+    private final PasswordEncoder passwordEncoder;
 
     public List<PatientDto> findAll() {
         List<Patient> patientList = patientEntityService.findAll();
@@ -24,6 +28,9 @@ public class PatientService {
 
     public PatientDto save(PatientSaveRequestDto patientSaveRequestDto) {
         Patient patient = PatientMapper.INSTANCE.convertToPatient(patientSaveRequestDto);
+
+        String password = passwordEncoder.encode(patient.getPassword());
+        patient.setPassword(password);
         patient = patientEntityService.save(patient);
         PatientDto patientDto = PatientMapper.INSTANCE.convertToPatientDto(patient);
         return patientDto;
