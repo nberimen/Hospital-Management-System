@@ -88,8 +88,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/swagger-ui/**",
                         "/swagger-ui.html",
                         "/v3/api-docs/**",
-                        "/api/v1/admins/**"
-                        )
+                        "/api/v1/admins/**",
+                        "/api/v1/patients/**",
+                        "/api/v1/doctors/**"
+
+                )
                 .permitAll()
                 .anyRequest().authenticated();
 
