@@ -1,6 +1,6 @@
 package com.nberimen.hospitalmanagementsystem.sec.security;
 
-import com.nberimen.hospitalmanagementsystem.patient.entity.Patient;
+import com.nberimen.hospitalmanagementsystem.user.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,27 +11,19 @@ import java.util.List;
 
 public class JwtUserDetails implements UserDetails {
 
-    private Long id;
-    private String username;
-    private String password;
+    private User user;
     private Collection<? extends GrantedAuthority> authorities;
 
-    private JwtUserDetails(Long id, String username, String password, Collection<? extends GrantedAuthority> authorities) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
+    private JwtUserDetails(User user, Collection<? extends GrantedAuthority> authorities) {
+        this.user = user;
         this.authorities = authorities;
     }
 
-    public static JwtUserDetails create(Patient patient){
-        Long id = patient.getId();
-        String username = patient.getIdentityNo().toString();
-        String password = patient.getPassword();
-
+    public static JwtUserDetails createAuth(User user){
         List<GrantedAuthority> grantedAuthorityList = new ArrayList<>();
-        grantedAuthorityList.add(new SimpleGrantedAuthority("patient"));
+        grantedAuthorityList.add(new SimpleGrantedAuthority("ROLE_" + user.getRole()));
 
-        return new JwtUserDetails(id, username, password, grantedAuthorityList);
+        return new JwtUserDetails(user, grantedAuthorityList);
     }
 
     @Override
@@ -41,12 +33,12 @@ public class JwtUserDetails implements UserDetails {
 
     @Override
     public String getPassword() {
-        return password;
+        return user.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return username;
+        return user.getIdentityNo().toString();
     }
 
     @Override
@@ -69,7 +61,7 @@ public class JwtUserDetails implements UserDetails {
         return true;
     }
 
-    public Long getId() {
-        return id;
+    public Long getId(){
+        return user.getId();
     }
 }

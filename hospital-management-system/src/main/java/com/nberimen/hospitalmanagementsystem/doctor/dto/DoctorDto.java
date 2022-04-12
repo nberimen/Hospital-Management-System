@@ -6,10 +6,10 @@ import lombok.Data;
 public class DoctorDto {
 
     private Long id;
-    private Long hospitalId;
+    private Long identityNo;
     private String firstName;
     private String lastName;
-    private String email;
-    private String phoneNumber;
-    private String branch;
+    private Long departmentId;
+    private String role;
+
 }

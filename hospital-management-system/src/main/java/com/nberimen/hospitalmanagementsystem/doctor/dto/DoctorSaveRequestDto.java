@@ -5,11 +5,9 @@ import lombok.Data;
 @Data
 public class DoctorSaveRequestDto {
 
-    private Long hospitalId;
+    private Long identityNo;
     private String firstName;
     private String lastName;
-    private String email;
     private String password;
-    private String phoneNumber;
-    private String branch;
+    private Long departmentId;
 }

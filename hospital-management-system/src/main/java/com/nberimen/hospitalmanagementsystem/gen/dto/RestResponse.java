@@ -35,3 +35,4 @@ public class RestResponse<T> implements Serializable {
         return new RestResponse<>(null, true);
     }
 }
+

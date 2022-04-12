@@ -49,7 +49,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         String fullToken = request.getHeader("Authorization");
 
         String token = null;
-        if (StringUtils.hasText(fullToken)) {
+        if (StringUtils.hasText(fullToken) && fullToken.startsWith("Bearer ")) {
             String bearer = EnumJwtConstant.BEARER.getConstant();
             if (fullToken.startsWith(bearer)) {
                 token = fullToken.substring(bearer.length());
