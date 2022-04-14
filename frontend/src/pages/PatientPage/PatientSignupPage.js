@@ -6,6 +6,8 @@ import png from "../../assets/careers-clipart-proffesional-6.png";
 import { useDispatch } from "react-redux";
 import { signupHandler } from "../../redux/authActions";
 import { useApiProgress } from "../../shared/ApiProgress";
+import ButtonWithProgress from "../../components/ButtonWithProgress";
+
 
 const PatientSignupPage = (props) => {
   const dispatch = useDispatch();
@@ -119,17 +121,11 @@ const PatientSignupPage = (props) => {
                     />
 
                     <div className="text-center">
-                      <button
-                        className="btn btn-primary"
-                        type="submit"
-                        name="submit"
+                      <ButtonWithProgress
                         disabled={pendingApiCall}
-                      >
-                        {pendingApiCall && (
-                          <span className="spinner-border spinner-border-sm"></span>
-                        )}
-                        Sign Up
-                      </button>
+                        pendingApiCall={pendingApiCall}
+                        text="Sign Up"
+                      />
                     </div>
                   </form>
                 </div>

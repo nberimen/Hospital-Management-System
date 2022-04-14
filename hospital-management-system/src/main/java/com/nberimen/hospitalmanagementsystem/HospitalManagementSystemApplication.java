@@ -4,6 +4,8 @@ import com.nberimen.hospitalmanagementsystem.admin.Admin;
 import com.nberimen.hospitalmanagementsystem.admin.AdminMapper;
 import com.nberimen.hospitalmanagementsystem.admin.AdminService;
 import com.nberimen.hospitalmanagementsystem.admin.dto.AdminSaveRequestDto;
+import com.nberimen.hospitalmanagementsystem.appointment.AppointmentService;
+import com.nberimen.hospitalmanagementsystem.appointment.dto.AppointmentSaveRequestDto;
 import com.nberimen.hospitalmanagementsystem.city.City;
 import com.nberimen.hospitalmanagementsystem.city.CityService;
 import com.nberimen.hospitalmanagementsystem.city.dto.CityDto;
@@ -21,6 +23,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.util.Date;
+
 @SpringBootApplication
 public class HospitalManagementSystemApplication {
 
@@ -34,6 +38,7 @@ public class HospitalManagementSystemApplication {
                                          PatientService patientService,
                                          CityService cityService,
                                          HospitalService hospitalService,
+                                         AppointmentService appointmentService,
                                          DepartmentService departmentService
     ) {
 
@@ -105,6 +110,13 @@ public class HospitalManagementSystemApplication {
             doctor2.setPassword("123456");
             doctor2.setDepartmentId(2L);
             doctorService.save(doctor2);
+
+            AppointmentSaveRequestDto appointment = new AppointmentSaveRequestDto();
+            appointment.setAppointmentDate(new Date());
+            appointment.setAppointmentTime(new Date());
+            appointment.setPatientId(2L);
+            appointment.setDoctorId(4L);
+            appointmentService.save(appointment);
 
         };
     }

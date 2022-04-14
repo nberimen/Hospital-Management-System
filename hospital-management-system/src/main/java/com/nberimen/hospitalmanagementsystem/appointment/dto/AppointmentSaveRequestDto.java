@@ -10,4 +10,5 @@ public class AppointmentSaveRequestDto {
     private Long patientId;
     private Long doctorId;
     private Date appointmentDate;
+    private Date appointmentTime;
 }

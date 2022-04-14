@@ -12,7 +12,7 @@ const HomePage = () => {
             <div className="row">
               <div className="col-lg-5 p-5">
                 <h1 className="fw-bold" style={{ marginTop: "5rem" }}>
-                  Hemen Randevu Al
+                  Hoş Geldiniz
                 </h1>
               </div>
 
@@ -39,7 +39,7 @@ const HomePage = () => {
             <div className="col-lg-4">
               <div>
                 <FaUserCheck className="large-icon" />
-                <Link className="nav-link" to="/patient">
+                <Link className="nav-link" to="/signup">
                   <span className="ms-3"> Hemen Kayıt Ol</span>
                 </Link>
               </div>

@@ -20,4 +20,8 @@ public class Appointment extends BaseEntity {
     @Column(name = "APPOINTMENT_DATE")
     @Temporal(TemporalType.DATE)
     private Date appointmentDate;
+
+    @Column(name = "APPOINTMENT_TIME")
+    @Temporal(TemporalType.TIME)
+    private Date appointmentTime;
 }

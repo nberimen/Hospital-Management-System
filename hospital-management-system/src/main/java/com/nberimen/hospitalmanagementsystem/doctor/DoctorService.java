@@ -1,5 +1,7 @@
 package com.nberimen.hospitalmanagementsystem.doctor;
 
+import com.nberimen.hospitalmanagementsystem.department.DepartmentService;
+import com.nberimen.hospitalmanagementsystem.department.dto.DepartmentDto;
 import com.nberimen.hospitalmanagementsystem.doctor.dto.DoctorDto;
 import com.nberimen.hospitalmanagementsystem.doctor.dto.DoctorSaveRequestDto;
 import com.nberimen.hospitalmanagementsystem.doctor.entityservice.DoctorEntityService;
@@ -9,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -18,10 +21,17 @@ public class DoctorService {
 
     private final DoctorEntityService doctorEntityService;
     private final PasswordEncoder passwordEncoder;
+    private final DepartmentService departmentService;
 
     public List<DoctorDto> findAll() {
         List<Doctor> doctorList = doctorEntityService.findAll();
-        List<DoctorDto> doctorDtoList = DoctorMapper.INSTANCE.convertToDoctorDtoList(doctorList);
+        List<DoctorDto> doctorDtoList = new ArrayList<>();
+        for (Doctor doctor : doctorList) {
+            DepartmentDto departmentDto = departmentService.findById(doctor.getDepartmentId());
+            DoctorDto doctorDto = DoctorMapper.INSTANCE.convertToDoctorDto(doctor);
+            doctorDto.setDepartmentDto(departmentDto);
+            doctorDtoList.add(doctorDto);
+        }
         return doctorDtoList;
     }
 
@@ -42,7 +52,9 @@ public class DoctorService {
 
     public DoctorDto findById(Long id) {
         Doctor inDB = doctorEntityService.getById(id);
+        DepartmentDto departmentDto = departmentService.findById(inDB.getDepartmentId());
         DoctorDto doctorDto = DoctorMapper.INSTANCE.convertToDoctorDto(inDB);
+        doctorDto.setDepartmentDto(departmentDto);
         return doctorDto;
     }
 }

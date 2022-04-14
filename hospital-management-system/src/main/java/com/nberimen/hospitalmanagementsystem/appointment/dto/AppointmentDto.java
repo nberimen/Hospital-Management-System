@@ -1,5 +1,7 @@
 package com.nberimen.hospitalmanagementsystem.appointment.dto;
 
+import com.nberimen.hospitalmanagementsystem.doctor.dto.DoctorDto;
+import com.nberimen.hospitalmanagementsystem.patient.dto.PatientDto;
 import lombok.Data;
 
 import java.util.Date;
@@ -8,7 +10,8 @@ import java.util.Date;
 public class AppointmentDto {
 
     private Long id;
-    private Long patientId;
-    private Long doctorId;
+    private PatientDto patientDto;
+    private DoctorDto doctorDto;
     private Date appointmentDate;
+    private Date appointmentTime;
 }

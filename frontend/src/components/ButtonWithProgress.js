@@ -7,6 +7,7 @@ const ButtonWithProgress = (props) => {
             className={className || "btn btn-primary"}
             onClick={onClick}
             disabled={disabled}
+            type="submit"
         >
             {pendingApiCall && <span className="spinner-border spinner-border-sm text-light"></span>}
             {text}
