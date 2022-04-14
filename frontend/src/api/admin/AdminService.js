@@ -17,7 +17,10 @@ export const deleteDoctor = (id) => {
 //*********************PATIENT***********************/
 export const getAllPatient = () => {
     return axios.get(`/api/v1/admins/find-all-patient`);
-  };
+};
+export const getPatientById = (id) => {
+  return axios.get(`/api/v1/admins/patient/${id}`);
+};
   
   export const savePatient = (creds) => {
     return axios.post(`/api/v1/admins/save-patient`, creds);
@@ -37,4 +40,14 @@ export const getAllAppointment = () => {
   
 export const deleteAppointment = (id) => {
     return axios.delete(`/api/v1/admins/delete-appointment/${id}`);
-  };
+};
+  
+//*********************CITY***********************/
+export const getCity = () => {
+  return axios.get(`/api/v1/admins/find-all-appointment`);
+};
+
+//*********************DEPARTMENT***********************/
+export const getDepartment = () => {
+  return axios.get(`/api/v1/departments`);
+};

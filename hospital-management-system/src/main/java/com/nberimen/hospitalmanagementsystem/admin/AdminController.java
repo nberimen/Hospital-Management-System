@@ -62,6 +62,13 @@ public class AdminController {
         return ResponseEntity.ok(RestResponse.of(patientDtoList));
     }
 
+    @GetMapping("/patient/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ResponseEntity findPatientById(@PathVariable Long id) {
+        PatientDto patientDto = adminService.findPatientById(id);
+        return ResponseEntity.ok(RestResponse.of(patientDto));
+    }
+
     @DeleteMapping("/delete-patient/{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity deletePatient(@PathVariable Long id) {
