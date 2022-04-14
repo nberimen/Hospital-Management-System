@@ -1,15 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutSuccess } from "../redux/authActions";
+import * as FaIcons from "react-icons/fa";
+import * as AiIcons from "react-icons/ai";
+import { SidebarDataAdmin, SidebarDataDoctor, SidebarDataPatient } from "../components/SidebarData";
+import * as ROLE from "../shared/ConstantsRole";
+import "./TopBar.css";
+import { IconContext } from "react-icons";
+
 const TopBar = (props) => {
-  const { isLoggedIn } = useSelector((store) => ({
+  const [sidebar, setSidebar] = useState(false);
+  const { isLoggedIn, role } = useSelector((store) => ({
     isLoggedIn: store.isLoggedIn,
+    role: store.role,
   }));
   const dispatch = useDispatch();
   const onLogoutSuccess = () => {
     dispatch(logoutSuccess());
   };
+  const showSidebar = () => setSidebar(!sidebar);
 
   let links = (
     <div className="collapse navbar-collapse">
@@ -48,16 +58,66 @@ const TopBar = (props) => {
     );
   }
   return (
-    <div className="shadow-sm bg-primary mb-2">
-      <nav className="navbar navbar-dark navbar-expand container">
-        <div className="container-fluid">
-          <Link className="navbar-brand" to="/">
-            Hospital Management
+    <IconContext.Provider value={{ color: "fff" }}>
+      <div className="shadow-sm bg-primary mb-2">
+        {isLoggedIn && (
+          <Link to="#" className="menu-bars">
+            <FaIcons.FaBars onClick={showSidebar} />
           </Link>
-          {links}
-        </div>
-      </nav>
-    </div>
+        )}
+        <nav className="navbar navbar-dark navbar-expand container">
+          <div className="container-fluid">
+            <Link className="navbar-brand" to="/">
+              Hospital Management
+            </Link>
+            {links}
+          </div>
+        </nav>
+
+        <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
+          <ul className="nav-menu-items" onClick={showSidebar}>
+            <li className="navbar-toggle">
+              <Link to="#" className="menu-bars">
+                <AiIcons.AiOutlineClose />
+              </Link>
+            </li>
+            {role == ROLE.ADMIN &&
+              SidebarDataAdmin.map((item, index) => {
+                return (
+                  <li key={index} className={item.cName}>
+                    <Link to={item.path}>
+                      {item.icon}
+                      <span>{item.title}</span>
+                    </Link>
+                  </li>
+                );
+              })}
+            {role == ROLE.PATIENT &&
+              SidebarDataPatient.map((item, index) => {
+                return (
+                  <li key={index} className={item.cName}>
+                    <Link to={item.path}>
+                      {item.icon}
+                      <span>{item.title}</span>
+                    </Link>
+                  </li>
+                );
+              })}
+            {role == ROLE.DOCTOR &&
+              SidebarDataDoctor.map((item, index) => {
+                return (
+                  <li key={index} className={item.cName}>
+                    <Link to={item.path}>
+                      {item.icon}
+                      <span>{item.title}</span>
+                    </Link>
+                  </li>
+                );
+              })}
+          </ul>
+        </nav>
+      </div>
+    </IconContext.Provider>
   );
 };
 
