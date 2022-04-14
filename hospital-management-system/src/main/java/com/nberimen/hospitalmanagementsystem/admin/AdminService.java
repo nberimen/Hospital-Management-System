@@ -6,11 +6,15 @@ import com.nberimen.hospitalmanagementsystem.admin.entityservice.AdminEntityServ
 import com.nberimen.hospitalmanagementsystem.appointment.AppointmentService;
 import com.nberimen.hospitalmanagementsystem.appointment.dto.AppointmentDto;
 import com.nberimen.hospitalmanagementsystem.appointment.dto.AppointmentSaveRequestDto;
+import com.nberimen.hospitalmanagementsystem.doctor.DoctorService;
 import com.nberimen.hospitalmanagementsystem.doctor.dto.DoctorDto;
 import com.nberimen.hospitalmanagementsystem.doctor.dto.DoctorSaveRequestDto;
-import com.nberimen.hospitalmanagementsystem.doctor.DoctorService;
-import com.nberimen.hospitalmanagementsystem.patient.dto.PatientDto;
+import com.nberimen.hospitalmanagementsystem.gen.enums.GenErrorMessage;
+import com.nberimen.hospitalmanagementsystem.gen.exceptions.ItemNotFoundException;
 import com.nberimen.hospitalmanagementsystem.patient.PatientService;
+import com.nberimen.hospitalmanagementsystem.patient.dto.PatientDto;
+import com.nberimen.hospitalmanagementsystem.user.User;
+import com.nberimen.hospitalmanagementsystem.user.UserService;
 import com.nberimen.hospitalmanagementsystem.user.enums.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -27,6 +31,7 @@ public class AdminService {
     private final AdminEntityService adminEntityService;
     private final PatientService patientService;
     private final DoctorService doctorService;
+    private final UserService userService;
     private final AppointmentService appointmentService;
     private final PasswordEncoder passwordEncoder;
 
@@ -50,8 +55,13 @@ public class AdminService {
         return patientDtoList;
     }
 
-    public void deletePatient(Long id) {
-        patientService.delete(id);
+    public PatientDto findPatientById(Long id) {
+        PatientDto patientDto = patientService.findById(id);
+        return patientDto;
+    }
+
+    public void deletePatient(Long identityNo) {
+        patientService.delete(getUser(identityNo).getId());
     }
 
     /*************************DOCTOR*************************************/
@@ -61,14 +71,15 @@ public class AdminService {
         return doctorDtoList;
     }
 
-    public void deleteDoctor(Long id) {
-        doctorService.delete(id);
+    public void deleteDoctor(Long identityNo) {
+        doctorService.delete(getUser(identityNo).getId());
     }
 
     public DoctorDto saveDoctor(DoctorSaveRequestDto doctorSaveRequestDto) {
         DoctorDto doctorDto = doctorService.save(doctorSaveRequestDto);
         return doctorDto;
     }
+
 
     /*************************APPOINTMENT*************************************/
 
@@ -84,6 +95,16 @@ public class AdminService {
     public AppointmentDto saveAppointment(AppointmentSaveRequestDto appointmentSaveRequestDto) {
         AppointmentDto appointmentDto = appointmentService.save(appointmentSaveRequestDto);
         return appointmentDto;
+    }
+
+    /******************************USER******************************************/
+
+    private User getUser(Long identityNo) {
+        User user = userService.findByIdentityNo(identityNo);
+        if (user == null) {
+            throw new ItemNotFoundException(GenErrorMessage.ITEM_NOT_FOUND);
+        }
+        return user;
     }
 
 }
