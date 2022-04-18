@@ -1,5 +1,6 @@
 package com.nberimen.hospitalmanagementsystem.appointment;
 
+import com.nberimen.hospitalmanagementsystem.appointment.enums.StatusType;
 import com.nberimen.hospitalmanagementsystem.gen.entity.BaseEntity;
 import lombok.Data;
 
@@ -24,4 +25,9 @@ public class Appointment extends BaseEntity {
     @Column(name = "APPOINTMENT_TIME")
     @Temporal(TemporalType.TIME)
     private Date appointmentTime;
+
+    @Enumerated(value = EnumType.STRING)
+    @Column(name = "STATUS_TYPE", length = 30)
+    private StatusType statusType;
+
 }
