@@ -34,6 +34,18 @@ public class DoctorService {
         }
         return doctorDtoList;
     }
+    public  List<DoctorDto> findAllByDepartmentId(Long departmentId){
+        List<Doctor> doctorList = doctorEntityService.findAllByDepartmentId(departmentId);
+        List<DoctorDto> doctorDtoList = new ArrayList<>();
+        for (Doctor doctor : doctorList) {
+            DepartmentDto departmentDto = departmentService.findById(doctor.getDepartmentId());
+            DoctorDto doctorDto = DoctorMapper.INSTANCE.convertToDoctorDto(doctor);
+            doctorDto.setDepartmentDto(departmentDto);
+            doctorDtoList.add(doctorDto);
+        }
+        return doctorDtoList;
+
+    }
 
     public DoctorDto save(DoctorSaveRequestDto doctorSaveRequestDto) {
         Doctor doctor = DoctorMapper.INSTANCE.convertToDoctor(doctorSaveRequestDto);

@@ -28,6 +28,12 @@ public class DoctorController {
         return ResponseEntity.ok(RestResponse.of(doctorDto));
     }
 
+    @GetMapping("/department/{departmentId}")
+    public ResponseEntity findAllByDepartmentId(@PathVariable Long departmentId) {
+        List<DoctorDto> doctorDtoList = doctorService.findAllByDepartmentId(departmentId);
+        return ResponseEntity.ok(RestResponse.of(doctorDtoList));
+    }
+
     @PostMapping
     public ResponseEntity save(@RequestBody DoctorSaveRequestDto doctorSaveRequestDto) {
         DoctorDto doctorDto = doctorService.save(doctorSaveRequestDto);
