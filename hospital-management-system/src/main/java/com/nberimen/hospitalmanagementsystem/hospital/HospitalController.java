@@ -21,6 +21,12 @@ public class HospitalController {
         return ResponseEntity.ok(RestResponse.of(hospitalDtoList));
     }
 
+    @GetMapping("/city/{cityId}")
+    public ResponseEntity findAllByCityId(@PathVariable Long cityId) {
+        List<HospitalDto> hospitalDtoList = hospitalService.findAllByCityId(cityId);
+        return ResponseEntity.ok(RestResponse.of(hospitalDtoList));
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity findById(@PathVariable Long id) {
         HospitalDto hospitalDto = hospitalService.findById(id);

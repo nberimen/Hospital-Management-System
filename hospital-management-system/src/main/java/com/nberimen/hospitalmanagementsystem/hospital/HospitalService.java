@@ -21,6 +21,11 @@ public class HospitalService {
         List<HospitalDto> hospitalDtoList = HospitalMapper.INSTANCE.convertToHospitalDtoList(hospitalList);
         return hospitalDtoList;
     }
+    public List<HospitalDto> findAllByCityId(Long cityId) {
+        List<Hospital> hospitalList = hospitalEntityService.findAllByCityId(cityId);
+        List<HospitalDto> hospitalDtoList = HospitalMapper.INSTANCE.convertToHospitalDtoList(hospitalList);
+        return hospitalDtoList;
+    }
 
     public HospitalDto save(HospitalSaveRequestDto hospitalSaveRequestDto) {
         Hospital hospital = HospitalMapper.INSTANCE.convertToHospital(hospitalSaveRequestDto);
