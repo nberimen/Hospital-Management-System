@@ -22,6 +22,11 @@ public class DepartmentService {
         return departmentDtoList;
     }
 
+    public List<DepartmentDto> findAllByHospitalId(Long hospitalId) {
+        List<Department> departmentList = departmentEntityService.findAllByHospitalId(hospitalId);
+        List<DepartmentDto> departmentDtoList = DepartmentMapper.INSTANCE.convertToDepartmentDtoList(departmentList);
+        return departmentDtoList;
+    }
     public DepartmentDto save(DepartmentSaveRequestDto departmentSaveRequestDto) {
         Department department = DepartmentMapper.INSTANCE.convertToDepartment(departmentSaveRequestDto);
         department = departmentEntityService.save(department);

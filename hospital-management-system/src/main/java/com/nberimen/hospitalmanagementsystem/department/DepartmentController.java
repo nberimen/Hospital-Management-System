@@ -28,6 +28,12 @@ public class DepartmentController {
         return ResponseEntity.ok(RestResponse.of(departmentDtoList));
     }
 
+    @GetMapping("/hospital/{hospitalId}")
+    public ResponseEntity findAllByHospitalId(@PathVariable Long hospitalId) {
+        List<DepartmentDto> departmentDtoList = departmentService.findAllByHospitalId(hospitalId);
+        return ResponseEntity.ok(RestResponse.of(departmentDtoList));
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity findById(@PathVariable Long id) {
         DepartmentDto departmentDto = departmentService.findById(id);
