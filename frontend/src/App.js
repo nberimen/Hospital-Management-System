@@ -20,6 +20,7 @@ import DoctorList from "./pages/AdminPage/DoctorList";
 import PatientList from "./pages/AdminPage/PatientList";
 import AppointmentDetails from "./pages/AdminPage/AppointmnetDetails";
 import DeleteDoctor from "./pages/AdminPage/DeleteDoctor";
+import AppointmentBook from "./pages/PatientPage/AppointmentBook";
 
 const App = () => {
   const { isLoggedIn, role } = useSelector((store) => ({
@@ -32,16 +33,25 @@ const App = () => {
         <TopBar />
         <Switch>
           {!role && <Route exact path="/" component={HomePage} />}
-          {!isLoggedIn && <Route path="/signup" component={PatientSignupPage} />}
+          {!isLoggedIn && (
+            <Route path="/signup" component={PatientSignupPage} />
+          )}
           {!isLoggedIn && <Route path="/login" component={LoginPage} />}
-          {role == ROLE.ADMIN &&  <Route exact path="/" component={AdminPage} />}
+          {role === ROLE.ADMIN && (
+            <Route exact path="/" component={AdminPage} />
+          )}
           <Route path="/add-doctor" component={DoctorAdd} />
           <Route path="/delete-doctor" component={DeleteDoctor} />
           <Route path="/doctor-list" component={DoctorList} />
           <Route path="/patient-list" component={PatientList} />
           <Route path="/appointment-details" component={AppointmentDetails} />
-          {role == ROLE.DOCTOR && <Route exact path="/" component={DoctorPage} />}
-          {role == ROLE.PATIENT && <Route exact path="/" component={PatientPage} />}
+          <Route path="/appointment-list" component={AppointmentBook} />
+          {role === ROLE.DOCTOR && (
+            <Route exact path="/" component={DoctorPage} />
+          )}
+          {role === ROLE.PATIENT && (
+            <Route exact path="/" component={PatientPage} />
+          )}
         </Switch>
 
         <Footer />
