@@ -1,14 +1,10 @@
 package com.nberimen.hospitalmanagementsystem;
 
-import com.nberimen.hospitalmanagementsystem.admin.Admin;
-import com.nberimen.hospitalmanagementsystem.admin.AdminMapper;
 import com.nberimen.hospitalmanagementsystem.admin.AdminService;
 import com.nberimen.hospitalmanagementsystem.admin.dto.AdminSaveRequestDto;
 import com.nberimen.hospitalmanagementsystem.appointment.AppointmentService;
 import com.nberimen.hospitalmanagementsystem.appointment.dto.AppointmentSaveRequestDto;
-import com.nberimen.hospitalmanagementsystem.city.City;
 import com.nberimen.hospitalmanagementsystem.city.CityService;
-import com.nberimen.hospitalmanagementsystem.city.dto.CityDto;
 import com.nberimen.hospitalmanagementsystem.city.dto.CitySaveRequestDto;
 import com.nberimen.hospitalmanagementsystem.department.DepartmentService;
 import com.nberimen.hospitalmanagementsystem.department.dto.DepartmentSaveRequestDto;
@@ -112,11 +108,25 @@ public class HospitalManagementSystemApplication {
             doctorService.save(doctor2);
 
             AppointmentSaveRequestDto appointment = new AppointmentSaveRequestDto();
-            appointment.setAppointmentDate(new Date());
-            appointment.setAppointmentTime(new Date());
+            appointment.setAppointmentDate(new Date(122, 04, 22, 11, 30));
+            appointment.setAppointmentTime(new Date(122, 04, 22, 11, 30));
             appointment.setPatientId(2L);
             appointment.setDoctorId(4L);
             appointmentService.save(appointment);
+
+            AppointmentSaveRequestDto appointment2 = new AppointmentSaveRequestDto();
+            appointment2.setAppointmentDate(new Date(122, 04, 22, 11, 00));
+            appointment2.setAppointmentTime(new Date(122, 04, 22, 11, 00));
+            appointment2.setPatientId(2L);
+            appointment2.setDoctorId(3L);
+            appointmentService.save(appointment2);
+
+            AppointmentSaveRequestDto appointment3 = new AppointmentSaveRequestDto();
+            appointment3.setAppointmentDate(new Date(122, 04, 19, 11, 00));
+            appointment3.setAppointmentTime(new Date(122, 04, 19, 11, 00));
+            appointment3.setPatientId(2L);
+            appointment3.setDoctorId(3L);
+            appointmentService.save(appointment3);
 
         };
     }
