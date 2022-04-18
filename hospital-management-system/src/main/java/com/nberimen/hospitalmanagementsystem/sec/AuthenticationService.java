@@ -79,6 +79,7 @@ public class AuthenticationService {
         String role = authenticationPrincipal.getAuthorities().iterator().next().toString();
 
         secLoginResponseDto.setIdentityNo(Long.parseLong(authenticationPrincipal.getUsername()));
+        secLoginResponseDto.setId(authenticationPrincipal.getId());
         secLoginResponseDto.setToken(fullToken);
         secLoginResponseDto.setRole(role);
 

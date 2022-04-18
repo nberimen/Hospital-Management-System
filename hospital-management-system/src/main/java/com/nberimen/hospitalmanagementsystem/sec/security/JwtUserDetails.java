@@ -19,7 +19,7 @@ public class JwtUserDetails implements UserDetails {
         this.authorities = authorities;
     }
 
-    public static JwtUserDetails createAuth(User user){
+    public static JwtUserDetails createAuth(User user) {
         List<GrantedAuthority> grantedAuthorityList = new ArrayList<>();
         grantedAuthorityList.add(new SimpleGrantedAuthority("ROLE_" + user.getRole()));
 
@@ -61,7 +61,7 @@ public class JwtUserDetails implements UserDetails {
         return true;
     }
 
-    public Long getId(){
+    public Long getId() {
         return user.getId();
     }
 }
