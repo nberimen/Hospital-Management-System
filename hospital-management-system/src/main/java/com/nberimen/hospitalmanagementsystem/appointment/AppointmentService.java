@@ -3,6 +3,7 @@ package com.nberimen.hospitalmanagementsystem.appointment;
 import com.nberimen.hospitalmanagementsystem.appointment.dto.AppointmentDto;
 import com.nberimen.hospitalmanagementsystem.appointment.dto.AppointmentSaveRequestDto;
 import com.nberimen.hospitalmanagementsystem.appointment.entityservice.AppointmentEntityService;
+import com.nberimen.hospitalmanagementsystem.appointment.enums.StatusType;
 import com.nberimen.hospitalmanagementsystem.doctor.DoctorService;
 import com.nberimen.hospitalmanagementsystem.doctor.dto.DoctorDto;
 import com.nberimen.hospitalmanagementsystem.patient.PatientService;
@@ -24,22 +25,26 @@ public class AppointmentService {
 
     public List<AppointmentDto> findAll() {
         List<Appointment> appointmentList = appointmentEntityService.findAll();
-        List<AppointmentDto> appointmentDtoList = new ArrayList<>();
+        List<AppointmentDto> appointmentDtoList = getAppointmentDtoList(appointmentList);
+        return appointmentDtoList;
+    }
 
-        for (Appointment appointment : appointmentList) {
-            DoctorDto doctorDto = doctorService.findById(appointment.getDoctorId());
-            PatientDto patientDto = patientService.findById(appointment.getPatientId());
-            AppointmentDto appointmentDto = AppointmentMapper.INSTANCE.convertToAppointmentDto(appointment);
-            appointmentDto.setDoctorDto(doctorDto);
-            appointmentDto.setPatientDto(patientDto);
-            appointmentDtoList.add(appointmentDto);
-        }
+    public List<AppointmentDto> findAllByStatusTypeAndPatientIdAndDoctorId(StatusType statusType, Long patietnId, Long doctorId) {
+        List<Appointment> appointmentList = appointmentEntityService.findAllByStatusTypeAndPatientIdAndDoctorId(statusType, patietnId, doctorId);
+        List<AppointmentDto> appointmentDtoList = getAppointmentDtoList(appointmentList);
+        return appointmentDtoList;
+    }
+
+    public List<AppointmentDto> findAllByPatientId(Long patientId) {
+        List<Appointment> appointmentList = appointmentEntityService.findAllByPatientId(patientId);
+        List<AppointmentDto> appointmentDtoList = getAppointmentDtoList(appointmentList);
         return appointmentDtoList;
     }
 
     public AppointmentDto save(AppointmentSaveRequestDto appointmentSaveRequestDto) {
         Appointment appointment = AppointmentMapper.INSTANCE.convetToAppointment(appointmentSaveRequestDto);
-        appointmentEntityService.save(appointment);
+        appointment.setStatusType(StatusType.ACTIVE);
+        appointment = appointmentEntityService.save(appointment);
         AppointmentDto appointmentDto = AppointmentMapper.INSTANCE.convertToAppointmentDto(appointment);
         return appointmentDto;
     }
@@ -57,6 +62,21 @@ public class AppointmentService {
     public void delete(Long id) {
         Appointment inDB = appointmentEntityService.getById(id);
         appointmentEntityService.delete(inDB);
+    }
+
+
+    private List<AppointmentDto> getAppointmentDtoList(List<Appointment> appointmentList) {
+        List<AppointmentDto> appointmentDtoList = new ArrayList<>();
+
+        for (Appointment appointment : appointmentList) {
+            DoctorDto doctorDto = doctorService.findById(appointment.getDoctorId());
+            PatientDto patientDto = patientService.findById(appointment.getPatientId());
+            AppointmentDto appointmentDto = AppointmentMapper.INSTANCE.convertToAppointmentDto(appointment);
+            appointmentDto.setDoctorDto(doctorDto);
+            appointmentDto.setPatientDto(patientDto);
+            appointmentDtoList.add(appointmentDto);
+        }
+        return appointmentDtoList;
     }
 
 
