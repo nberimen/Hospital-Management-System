@@ -2,7 +2,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import React, { useEffect, useState } from "react";
 import Input from "../../components/Input";
-import png from "../../assets/hospital-banner-1.jpg";
+import png from "../../assets/login-page.jpg";
 import { useDispatch } from "react-redux";
 import { loginHandler } from "../../redux/authActions";
 import { useApiProgress } from "../../shared/ApiProgress";

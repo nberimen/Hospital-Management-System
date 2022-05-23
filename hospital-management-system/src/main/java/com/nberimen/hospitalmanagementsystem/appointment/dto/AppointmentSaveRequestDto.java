@@ -13,6 +13,6 @@ public class AppointmentSaveRequestDto {
     private Long doctorId;
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date appointmentDate;
-    @JsonFormat(pattern = "HH:mm")
+    @JsonFormat(pattern = "HH:mm:ss")
     private Date appointmentTime;
 }

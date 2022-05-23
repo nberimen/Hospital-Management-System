@@ -9,7 +9,14 @@ import java.util.List;
 @Repository
 public interface AppointmentRepository extends JpaRepository<Appointment, Long> {
 
-    List<Appointment> findAllByStatusTypeAndPatientIdAndDoctorId(StatusType statusType, Long patietnId, Long doctorId);
+    List<Appointment> findAllByStatusTypeAndPatientIdOrDoctorId(StatusType statusType, Long patietnId, Long doctorId);
+
     List<Appointment> findAllByPatientId(Long patientId);
+
+    List<Appointment> findAllByDoctorId(Long doctorId);
+
+    List<Appointment> findAllByStatusTypeAndPatientId(StatusType statusType, Long patientId);
+
+    List<Appointment> findAllByStatusTypeAndDoctorId(StatusType statusType, Long doctorId);
 
 }

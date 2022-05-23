@@ -16,11 +16,23 @@ public class AppointmentEntityService extends BaseEntityService<Appointment, App
         super(repository);
     }
 
-    public List<Appointment> findAllByStatusTypeAndPatientIdAndDoctorId(StatusType statusType, Long patietnId, Long doctorId){
-        return getRepository().findAllByStatusTypeAndPatientIdAndDoctorId(statusType, patietnId, doctorId);
+    public List<Appointment> findAllByStatusTypeAndPatientIdOrDoctorId(StatusType statusType, Long patietnId, Long doctorId) {
+        return getRepository().findAllByStatusTypeAndPatientIdOrDoctorId(statusType, patietnId, doctorId);
     }
 
-    public List<Appointment> findAllByPatientId(Long patientId){
+    public List<Appointment> findAllByPatientId(Long patientId) {
         return getRepository().findAllByPatientId(patientId);
+    }
+
+    public List<Appointment> findAllByDoctorId(Long doctorId) {
+        return getRepository().findAllByDoctorId(doctorId);
+    }
+
+    public List<Appointment> findAllByStatusTypeAndPatientId(StatusType statusType, Long patientId) {
+        return getRepository().findAllByStatusTypeAndPatientId(statusType, patientId);
+    }
+
+    public List<Appointment> findAllByStatusTypeAndDoctorId(StatusType statusType, Long doctorId) {
+        return getRepository().findAllByStatusTypeAndDoctorId(statusType, doctorId);
     }
 }

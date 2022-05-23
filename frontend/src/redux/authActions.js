@@ -1,5 +1,6 @@
 import * as ACTIONS from "./Constants";
 import { login, registerPatient } from "../api/auth/AuthService";
+import { saveDoctor } from "../api/admin/AdminService";
 export const logoutSuccess = () => {
   return {
     type: ACTIONS.LOGOUT_SUCCESS,
@@ -30,6 +31,13 @@ export const signupHandler = (user) => {
   return async function (dispatch) {
     const response = await registerPatient(user);
     await dispatch(loginHandler(user));
+    return response;
+  };
+};
+
+export const signupDoctorHandler = (user) => {
+  return async function (dispatch) {
+    const response = await saveDoctor(user);
     return response;
   };
 };

@@ -2,7 +2,7 @@ import { useFormik } from "formik";
 import React, { useEffect, useState } from "react";
 import * as Yup from "yup";
 import { deleteDoctor } from "../../api/admin/AdminService";
-import png from "../../assets/pngtree-vector-remove-user-icon-png-image_313048.jpg";
+import png from "../../assets/delete-doctor.jpg";
 import ButtonWithProgress from "../../components/ButtonWithProgress";
 import Input from "../../components/Input";
 

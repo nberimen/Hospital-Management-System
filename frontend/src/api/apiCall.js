@@ -13,4 +13,8 @@ export const getAllDepartmentsByHospitalId = (hospitalId) => {
 export const getAllDoctorByDepartmentId = (departmentId) => {
     return axios.get(`/api/v1/doctors/department/${departmentId}`);
 };
+
+export const deleteAppointmentById = (appointmentId) => {
+    return axios.delete(`/api/v1/appointments/${appointmentId}`);
+  };
   

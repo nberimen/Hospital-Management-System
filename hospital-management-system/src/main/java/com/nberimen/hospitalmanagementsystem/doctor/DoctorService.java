@@ -25,24 +25,13 @@ public class DoctorService {
 
     public List<DoctorDto> findAll() {
         List<Doctor> doctorList = doctorEntityService.findAll();
-        List<DoctorDto> doctorDtoList = new ArrayList<>();
-        for (Doctor doctor : doctorList) {
-            DepartmentDto departmentDto = departmentService.findById(doctor.getDepartmentId());
-            DoctorDto doctorDto = DoctorMapper.INSTANCE.convertToDoctorDto(doctor);
-            doctorDto.setDepartmentDto(departmentDto);
-            doctorDtoList.add(doctorDto);
-        }
+        List<DoctorDto> doctorDtoList = getDoctorDtoList(doctorList);
         return doctorDtoList;
     }
+
     public  List<DoctorDto> findAllByDepartmentId(Long departmentId){
         List<Doctor> doctorList = doctorEntityService.findAllByDepartmentId(departmentId);
-        List<DoctorDto> doctorDtoList = new ArrayList<>();
-        for (Doctor doctor : doctorList) {
-            DepartmentDto departmentDto = departmentService.findById(doctor.getDepartmentId());
-            DoctorDto doctorDto = DoctorMapper.INSTANCE.convertToDoctorDto(doctor);
-            doctorDto.setDepartmentDto(departmentDto);
-            doctorDtoList.add(doctorDto);
-        }
+        List<DoctorDto> doctorDtoList = getDoctorDtoList(doctorList);
         return doctorDtoList;
 
     }
@@ -68,5 +57,16 @@ public class DoctorService {
         DoctorDto doctorDto = DoctorMapper.INSTANCE.convertToDoctorDto(inDB);
         doctorDto.setDepartmentDto(departmentDto);
         return doctorDto;
+    }
+
+    private List<DoctorDto> getDoctorDtoList(List<Doctor> doctorList) {
+        List<DoctorDto> doctorDtoList = new ArrayList<>();
+        for (Doctor doctor : doctorList) {
+            DepartmentDto departmentDto = departmentService.findById(doctor.getDepartmentId());
+            DoctorDto doctorDto = DoctorMapper.INSTANCE.convertToDoctorDto(doctor);
+            doctorDto.setDepartmentDto(departmentDto);
+            doctorDtoList.add(doctorDto);
+        }
+        return doctorDtoList;
     }
 }

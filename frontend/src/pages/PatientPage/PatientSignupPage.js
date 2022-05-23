@@ -2,7 +2,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import React from "react";
 import Input from "../../components/Input";
-import png from "../../assets/careers-clipart-proffesional-6.png";
+import png from "../../assets/signup-page.png";
 import { useDispatch } from "react-redux";
 import { signupHandler } from "../../redux/authActions";
 import { useApiProgress } from "../../shared/ApiProgress";

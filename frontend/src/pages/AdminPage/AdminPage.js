@@ -1,5 +1,5 @@
 import React from "react";
-import png from "../../assets/1-12924.jpg";
+import png from "../../assets/admin-page.jpg";
 
 const AdminPage = () => {
   return (

@@ -29,14 +29,42 @@ public class AppointmentService {
         return appointmentDtoList;
     }
 
-    public List<AppointmentDto> findAllByStatusTypeAndPatientIdAndDoctorId(StatusType statusType, Long patietnId, Long doctorId) {
-        List<Appointment> appointmentList = appointmentEntityService.findAllByStatusTypeAndPatientIdAndDoctorId(statusType, patietnId, doctorId);
+    public List<AppointmentDto> findAllByStatusTypeAndPatientIdOrDoctorId(StatusType statusType, Long patietnId, Long doctorId) {
+        List<Appointment> appointmentList = appointmentEntityService.findAllByStatusTypeAndPatientIdOrDoctorId(statusType, patietnId, doctorId);
         List<AppointmentDto> appointmentDtoList = getAppointmentDtoList(appointmentList);
         return appointmentDtoList;
     }
 
     public List<AppointmentDto> findAllByPatientId(Long patientId) {
         List<Appointment> appointmentList = appointmentEntityService.findAllByPatientId(patientId);
+        List<AppointmentDto> appointmentDtoList = getAppointmentDtoList(appointmentList);
+        return appointmentDtoList;
+    }
+
+    public List<AppointmentDto> findAllByDoctorId(Long doctorId) {
+        List<Appointment> appointmentList = appointmentEntityService.findAllByDoctorId(doctorId);
+        List<AppointmentDto> appointmentDtoList = getAppointmentDtoList(appointmentList);
+        return appointmentDtoList;
+    }
+
+    public List<AppointmentDto> findAllByStatusTypeAndPatientId(String statusType, Long patientId) {
+        List<Appointment> appointmentList = new ArrayList<>();
+        if (statusType.equals("passive")) {
+            appointmentList = appointmentEntityService.findAllByStatusTypeAndPatientId(StatusType.PASSIVE, patientId);
+        } else {
+            appointmentList = appointmentEntityService.findAllByStatusTypeAndPatientId(StatusType.ACTIVE, patientId);
+        }
+        List<AppointmentDto> appointmentDtoList = getAppointmentDtoList(appointmentList);
+        return appointmentDtoList;
+    }
+
+    public List<AppointmentDto> findAllByStatusTypeAndDoctorId(String statusType, Long doctorId) {
+        List<Appointment> appointmentList = new ArrayList<>();
+        if (statusType.equals("passive")) {
+            appointmentList = appointmentEntityService.findAllByStatusTypeAndDoctorId(StatusType.PASSIVE, doctorId);
+        } else {
+            appointmentList = appointmentEntityService.findAllByStatusTypeAndDoctorId(StatusType.ACTIVE, doctorId);
+        }
         List<AppointmentDto> appointmentDtoList = getAppointmentDtoList(appointmentList);
         return appointmentDtoList;
     }
@@ -79,5 +107,9 @@ public class AppointmentService {
         return appointmentDtoList;
     }
 
-
+    public void cancel(Long appointmentId) {
+        Appointment inDB = appointmentEntityService.getById(appointmentId);
+        inDB.setStatusType(StatusType.PASSIVE);
+        appointmentEntityService.save(inDB);
+    }
 }

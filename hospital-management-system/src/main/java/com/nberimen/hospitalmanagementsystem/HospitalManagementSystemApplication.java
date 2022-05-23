@@ -12,8 +12,16 @@ import com.nberimen.hospitalmanagementsystem.doctor.DoctorService;
 import com.nberimen.hospitalmanagementsystem.doctor.dto.DoctorSaveRequestDto;
 import com.nberimen.hospitalmanagementsystem.hospital.HospitalService;
 import com.nberimen.hospitalmanagementsystem.hospital.dto.HospitalSaveRequestDto;
+import com.nberimen.hospitalmanagementsystem.medicine.MedicineService;
+import com.nberimen.hospitalmanagementsystem.medicine.dto.MedicineSaveRequestDto;
 import com.nberimen.hospitalmanagementsystem.patient.PatientService;
 import com.nberimen.hospitalmanagementsystem.patient.dto.PatientSaveRequestDto;
+import com.nberimen.hospitalmanagementsystem.prescription.PrescriptionService;
+import com.nberimen.hospitalmanagementsystem.prescription.dto.PrescriptionSaveRequestDto;
+import com.nberimen.hospitalmanagementsystem.report.ReportService;
+import com.nberimen.hospitalmanagementsystem.report.dto.ReportSaveRequestDto;
+import com.nberimen.hospitalmanagementsystem.test.TestService;
+import com.nberimen.hospitalmanagementsystem.test.dto.TestSaveRequestDto;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -35,7 +43,11 @@ public class HospitalManagementSystemApplication {
                                          CityService cityService,
                                          HospitalService hospitalService,
                                          AppointmentService appointmentService,
-                                         DepartmentService departmentService
+                                         DepartmentService departmentService,
+                                         PrescriptionService prescriptionService,
+                                         MedicineService medicineService,
+                                         ReportService reportService,
+                                         TestService testService
     ) {
 
         return (args) -> {
@@ -108,26 +120,107 @@ public class HospitalManagementSystemApplication {
             doctorService.save(doctor2);
 
             AppointmentSaveRequestDto appointment = new AppointmentSaveRequestDto();
-            appointment.setAppointmentDate(new Date(122, 04, 22, 11, 30));
-            appointment.setAppointmentTime(new Date(122, 04, 22, 11, 30));
+            appointment.setAppointmentDate(new Date(122, 05, 05, 11, 30));
+            appointment.setAppointmentTime(new Date(122, 05, 05, 11, 30));
             appointment.setPatientId(2L);
             appointment.setDoctorId(4L);
             appointmentService.save(appointment);
 
             AppointmentSaveRequestDto appointment2 = new AppointmentSaveRequestDto();
-            appointment2.setAppointmentDate(new Date(122, 04, 22, 11, 00));
-            appointment2.setAppointmentTime(new Date(122, 04, 22, 11, 00));
+            appointment2.setAppointmentDate(new Date(122, 05, 05, 11, 00));
+            appointment2.setAppointmentTime(new Date(122, 05, 05, 11, 00));
             appointment2.setPatientId(2L);
             appointment2.setDoctorId(3L);
             appointmentService.save(appointment2);
 
             AppointmentSaveRequestDto appointment3 = new AppointmentSaveRequestDto();
-            appointment3.setAppointmentDate(new Date(122, 04, 19, 11, 00));
-            appointment3.setAppointmentTime(new Date(122, 04, 19, 11, 00));
+            appointment3.setAppointmentDate(new Date(122, 05, 02, 11, 00));
+            appointment3.setAppointmentTime(new Date(122, 05, 02, 11, 00));
             appointment3.setPatientId(2L);
             appointment3.setDoctorId(3L);
             appointmentService.save(appointment3);
 
+
+            PrescriptionSaveRequestDto prescription = new PrescriptionSaveRequestDto();
+            prescription.setPatientId(2L);
+            prescription.setDoctorId(3L);
+            prescription.setPrescriptionNo("IXW7OFBR");
+            prescriptionService.save(prescription);
+
+            PrescriptionSaveRequestDto prescription2 = new PrescriptionSaveRequestDto();
+            prescription2.setPatientId(2L);
+            prescription2.setDoctorId(4L);
+            prescription2.setPrescriptionNo("KEPZNL78");
+            prescriptionService.save(prescription2);
+
+            // medicine
+            MedicineSaveRequestDto medicine = new MedicineSaveRequestDto();
+            medicine.setName("KONAZOL ŞAMPUAN 100ML");
+            medicine.setBarcode(8699512560021L);
+            medicine.setDescription("-");
+            medicine.setDose(1L);
+            medicine.setPeriod(1L);
+            medicine.setUsage("CİLT ÜZERİNE");
+            medicine.setNumberOfBoxes(2L);
+            medicine.setUseCount(1L);
+            medicine.setPrescriptionId(1L);
+            medicineService.save(medicine);
+
+            MedicineSaveRequestDto medicine2 = new MedicineSaveRequestDto();
+            medicine2.setName("ADVANTAN M LOSYON");
+            medicine2.setBarcode(8699546480012L);
+            medicine2.setDescription("-");
+            medicine2.setDose(1L);
+            medicine2.setPeriod(1L);
+            medicine2.setUsage("CİLT ÜZERİNE");
+            medicine2.setNumberOfBoxes(1L);
+            medicine2.setUseCount(2L);
+            medicine2.setPrescriptionId(1L);
+            medicineService.save(medicine2);
+
+            MedicineSaveRequestDto medicine3 = new MedicineSaveRequestDto();
+            medicine3.setName("METİGAST 140 MG YUMUŞAK KAPSÜL (40 KAPSÜL)");
+            medicine3.setBarcode(8680199197846L);
+            medicine3.setDescription("-");
+            medicine3.setDose(1L);
+            medicine3.setPeriod(1L);
+            medicine3.setUsage("AĞIZDAN (ORAL)");
+            medicine3.setNumberOfBoxes(3L);
+            medicine3.setUseCount(3L);
+            medicine3.setPrescriptionId(2L);
+            medicineService.save(medicine3);
+
+            MedicineSaveRequestDto medicine4 = new MedicineSaveRequestDto();
+            medicine4.setName("DUSPATALİN 200 MG RETARD KAPSÜL");
+            medicine4.setBarcode(8699820030360L);
+            medicine4.setDescription("-");
+            medicine4.setDose(1L);
+            medicine4.setPeriod(1L);
+            medicine4.setUsage("AĞIZDAN (ORAL)");
+            medicine4.setNumberOfBoxes(3L);
+            medicine4.setUseCount(2L);
+            medicine4.setPrescriptionId(2L);
+            medicineService.save(medicine4);
+
+            //Reports
+            ReportSaveRequestDto report = new ReportSaveRequestDto();
+            report.setReportNo("550349-1");
+            report.setDoctorId(3L);
+            report.setPatientId(2L);
+            report.setReportType("SAĞLIK (SAĞLAM) RAPORU");
+            report.setDiagnosis("GENEL TIBBİ MUAYENE");
+            reportService.save(report);
+
+
+            //Tests
+            TestSaveRequestDto test = new TestSaveRequestDto();
+            test.setDoctorId(3L);
+            test.setPatientId(2L);
+            test.setProcessName("Vitamin B12");
+            test.setResult("132");
+            test.setResultUnit("ng/L");
+            test.setReferenceValue("146-914");
+            testService.save(test);
         };
     }
 

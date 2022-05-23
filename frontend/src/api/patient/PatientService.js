@@ -25,3 +25,23 @@ export const getAllByDoctorIdAndPatientId = (patientId, doctorId) => {
 export const getAllByPatientId = (patientId) => {
   return axios.get(`/api/v1/appointments/patient/${patientId}`);
 };
+
+export const getAllPassiveByPatientId = (patientId) => {
+  return axios.get(`/api/v1/appointments/patient/${patientId}/passive`);
+};
+
+export const getAllPrescription = (patientId) => {
+  return axios.get(`/api/v1/prescriptions/${patientId}`);
+};
+
+export const getAllMeds = (prescriptionId) => {
+  return axios.get(`/api/v1/meds/prescription/${prescriptionId}`);
+};
+
+export const getAllReports = (patientId) => {
+  return axios.get(`/api/v1/reports/patient/${patientId}`);
+};
+
+export const getAllTests = (patientId) => {
+  return axios.get(`/api/v1/tests/patient/${patientId}`);
+};

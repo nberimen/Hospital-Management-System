@@ -9,6 +9,7 @@ const PatientList = () => {
 
   const loadPatients = async () => {
     const result = await getAllPatient();
+    console.log(result.data.data)
     setPatients(result.data.data);
   };
 

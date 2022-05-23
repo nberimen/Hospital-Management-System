@@ -41,7 +41,7 @@ const TopBar = (props) => {
     links = (
       <div className="d-flex">
         <ul className="navbar-nav ms-auto my-2 my-lg-0 navbar-nav-scroll">
-          <li className="nav-link">
+          <Link to="/" className="nav-link">
             <span
               className="text-light me-2"
               onClick={onLogoutSuccess}
@@ -52,7 +52,7 @@ const TopBar = (props) => {
             {
               //<span className="material-icons text-light ms-2">logout</span>
             }
-          </li>
+          </Link>
         </ul>
       </div>
     );

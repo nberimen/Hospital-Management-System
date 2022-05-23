@@ -1,7 +1,7 @@
 import React from "react";
 import { FaUserCheck } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import png from "../../assets/17-825x510.jpg";
+import png from "../../assets/home-page.jpg";
 
 const HomePage = () => {
   return (

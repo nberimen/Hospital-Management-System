@@ -4,8 +4,9 @@ import {
   getAllDoctor,
   getPatientById,
 } from "../../api/admin/AdminService";
+import { deleteAppointmentById } from "../../api/apiCall";
 
-const AppointmentDetails = () => {
+const AppointmentDetails = (props) => {
   const [appointments, setAppointments] = useState([]);
   useEffect(() => {
     loadAppointments();
@@ -14,6 +15,14 @@ const AppointmentDetails = () => {
   const loadAppointments = async () => {
     const result = await getAllAppointment();
     setAppointments(result.data.data);
+  };
+  const deleteAppointment = async (id) => {
+    const { history } = props;
+    const { push } = history;
+    try {
+      await deleteAppointmentById(id);
+      push("/");
+    } catch (error) {}
   };
 
   return (
@@ -28,6 +37,7 @@ const AppointmentDetails = () => {
             <th>Appointment Time</th>
             <th>Doctor</th>
             <th>Department</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -35,12 +45,29 @@ const AppointmentDetails = () => {
             return (
               <tr key={appointment.id}>
                 <td>{index + 1}</td>
-                <td>{appointment.patientDto.firstName +" "+appointment.patientDto.lastName}</td>
+                <td>
+                  {appointment.patientDto.firstName +
+                    " " +
+                    appointment.patientDto.lastName}
+                </td>
                 <td>{appointment.patientDto.identityNo}</td>
                 <td>{appointment.appointmentDate}</td>
                 <td>{appointment.appointmentTime}</td>
-                <td>{appointment.doctorDto.firstName + " "+ appointment.doctorDto.lastName}</td>
+                <td>
+                  {appointment.doctorDto.firstName +
+                    " " +
+                    appointment.doctorDto.lastName}
+                </td>
                 <td>{appointment.doctorDto.departmentDto.name}</td>
+                <td>
+                  <button
+                    type="button"
+                    className="btn btn-danger"
+                    onClick={() => deleteAppointment(appointment.id)}
+                  >
+                    Delete
+                  </button>
+                </td>
               </tr>
             );
           })}

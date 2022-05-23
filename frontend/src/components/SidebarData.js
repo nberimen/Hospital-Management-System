@@ -3,6 +3,8 @@ import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
 import * as MdIcons from "react-icons/md";
 import * as HiIcons from "react-icons/hi";
+import * as GiIcons from "react-icons/gi";
+import * as IoIcons from "react-icons/io";
 
 export const SidebarDataAdmin = [
   {
@@ -53,7 +55,13 @@ export const SidebarDataDoctor = [
   {
     title: "Appointments",
     path: "/appointments",
-    icon: <FaIcons.FaUsers />,
+    icon: <FaIcons.FaList />,
+    cName: "nav-text",
+  },
+  {
+    title: "Appointment History",
+    path: "/appointment-history",
+    icon: <FaIcons.FaList />,
     cName: "nav-text",
   },
 ];
@@ -66,14 +74,38 @@ export const SidebarDataPatient = [
     cName: "nav-text",
   },
   {
-    title: "Book Appointment",
-    path: "/appointment-list",
-    icon: <FaIcons.FaUsers />,
+    title: "Visits",
+    path: "/visits",
+    icon: <FaIcons.FaHospital />,
     cName: "nav-text",
   },
   {
-    title: "Appointment History",
-    path: "/appointment-history",
+    title: "Prescriptions",
+    path: "/prescriptions",
+    icon: <FaIcons.FaFilePrescription />,
+    cName: "nav-text",
+  },
+  {
+    title: "Reports",
+    path: "/reports",
+    icon: <IoIcons.IoIosPaper />,
+    cName: "nav-text",
+  },
+  {
+    title: "Tests",
+    path: "/tests",
+    icon: <GiIcons.GiTestTubes />,
+    cName: "nav-text",
+  },
+  {
+    title: "Appointment List",
+    path: "/appointment-list",
+    icon: <FaIcons.FaList />,
+    cName: "nav-text",
+  },
+  {
+    title: "Add Appointment",
+    path: "/add-appointment",
     icon: <FaIcons.FaUsers />,
     cName: "nav-text",
   },
