@@ -1,0 +1,15 @@
+.mod {
+  min-width: 100vh;
+}
+
+.span {
+  font-size: large;
+  color: grey;
+}
+.list{
+    background-color: grey;
+    border-radius: 8px;
+}
+.li{
+  margin-bottom: 5px;
+}
