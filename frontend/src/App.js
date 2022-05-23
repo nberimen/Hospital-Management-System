@@ -27,7 +27,7 @@ import Visit from "./pages/PatientPage/Visit";
 import Prescription from "./pages/PatientPage/Prescription";
 import Report from "./pages/PatientPage/Report";
 import Test from "./pages/PatientPage/Test";
-import DrAppointmentHistory from "./pages/DoctorPage/AppointmentHistory";
+import DrAppointmentHistory from "./pages/DoctorPage/DrAppointmentHistory";
 
 const App = () => {
   const { isLoggedIn, role } = useSelector((store) => ({
